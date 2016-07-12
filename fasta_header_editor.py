@@ -5,7 +5,10 @@ import string
 import argparse
 
 def count(args):
-	file=open(args.fasta,'r')
+        if args.fasta is not '-':
+            file=open(args.fasta,'r')
+        else:
+            file=sys.stdin
 	for line in file:
 	    if '>' in line:
                 if args.genbank is True:
