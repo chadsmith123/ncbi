@@ -1,16 +1,22 @@
 #!/bin/python
+"""
+Genbank flat file parser
+
+Parses an NCBI flat file (*.gb) and writes a csv
+CSV columns are accession, organism, host, isolation source, and sequence length
+Requires Biopython
+"""
 # Chad Smith 7/9/2016
 import sys
+import argparse
 import csv
 from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature
-if len(sys.argv) ==1 :
-    print "usage: ", sys.argv[0], " <genbank db>"
-    print "Parses metadata from Genbank flat files."
-    exit(1)
-
 
 def index_genbank_features(gb_record, feature_type, qualifier) :
+    """
+    Parse features from a Genbank flat file
+    """
     answer = dict()
     for (index, feature) in enumerate(gb_record.features) :
         if feature.type==feature_type :
@@ -25,13 +31,15 @@ def index_genbank_features(gb_record, feature_type, qualifier) :
                         answer[value] = index
     return answer
 
-for arg in sys.argv[1:]:
+
+def count(args):
+    """
+    Write csv file from Genbank flat file
+    """
+    gb=args.gb
+    output=[]
+    for arg in args.gb:
         records=SeqIO.parse(arg,"genbank")
-        #record.annotations.keys()
-	prefix=str.split(arg,'.')
-        filename=prefix[0]+".csv"
-        print "Writing",filename
-	out_handle=open(filename,"w")
 	for record in records:
 		organism=record.annotations["organism"]
 		host_dict=index_genbank_features(record,"source","host")
@@ -43,6 +51,24 @@ for arg in sys.argv[1:]:
 		else: 
 			for key, value in isolation_dict.items(): isolation=key
 		seqlen=len(record.seq)
-		output="%s,%s,%s,%s,%i\n" % (record.id,organism,host,isolation,seqlen)
-                out_handle.write(output)
-        out_handle.close()
+		output.append("%s,%s,%s,%s,%i\n" % (record.id,organism,host,isolation,seqlen))
+        if args.filename == '-': 
+            for i in output: 
+                out=i.strip('\n')
+	        print out
+        else:
+            out_handle=open(args.filename,'w')
+            for i in output: out_handle.write(i)
+            out_handle.close()
+
+if __name__ == '__main__':
+        parser = argparse.ArgumentParser(description='Parse Genbank GB files to stdout')
+        parser.add_argument('gb', nargs='+',help='Genbank flat file(s)')
+        parser.add_argument('--out', dest='filename',default="-",help='CSV output file')
+
+        if len(sys.argv)==1:
+                parser.print_help()
+                sys.exit()
+        args = parser.parse_args()
+        count(args)
+

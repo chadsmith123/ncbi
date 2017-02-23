@@ -1,7 +1,7 @@
 #!/bin/bash 
 # Blast Search to XML
 # Chad Smith 07/09/2016
-# Executes a BLAST search and returns a csv file. 
+# Executes a BLAST search and returns a XML file. 
 NCBI=${HOME}/scripts/ncbi
 NUM_ALIGNMENTS=100
 EVALUE=1e-10
