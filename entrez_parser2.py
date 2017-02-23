@@ -1,4 +1,11 @@
 #!/bin/python
+"""
+Genbank flat file parser
+
+Parses an NCBI flat file (*.gb) and writes a csv
+CSV columns are accession, organism, host, isolation source, and sequence length
+Requires Biopython
+"""
 # Chad Smith 7/9/2016
 import sys
 import argparse
@@ -7,6 +14,9 @@ from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature
 
 def index_genbank_features(gb_record, feature_type, qualifier) :
+    """
+    Parse features from a Genbank flat file
+    """
     answer = dict()
     for (index, feature) in enumerate(gb_record.features) :
         if feature.type==feature_type :
@@ -23,6 +33,9 @@ def index_genbank_features(gb_record, feature_type, qualifier) :
 
 
 def count(args):
+    """
+    Write csv file from Genbank flat file
+    """
     gb=args.gb
     output=[]
     for arg in args.gb:

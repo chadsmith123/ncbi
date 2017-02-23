@@ -1,5 +1,9 @@
 #!/bin/python
-# Chad Smith 07/09/16
+""" 
+    Genbank Flat File From Blast XML
+    Chad Smith 07/09/16
+    Writes a Genbank *.gb flat file retrieved from NCBI using accesions from a BLAST XML file
+"""
 import sys
 import os
 import numpy

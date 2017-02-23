@@ -1,5 +1,12 @@
 #!/bin/python
-# Chad Smith 07/11/16
+"""
+ENTREZ Search
+Chad Smith 07/11/16
+
+Searches Genbank for <pattern> and returns a flat file. 
+Requires Biopython
+"""
+
 import sys
 import argparse
 from Bio import Entrez

@@ -1,5 +1,8 @@
-#!/bin/bash
+#!/bin/bash 
+# Blast Search to XML
 # Chad Smith 07/09/2016
+# Executes a BLAST search and returns a csv file. 
+NCBI=${HOME}/scripts/ncbi
 NUM_ALIGNMENTS=100
 EVALUE=1e-10
 #PERC_IDENTITY=97
@@ -7,7 +10,7 @@ EVALUE=1e-10
 
 if [ -z $1 ]; then
     echo "usage: $0 <FASTA>"
-    print "Writes an xml file from a blast search."
+    echo "Writes an xml file from a blast search."
     exit
 fi
 
@@ -23,7 +26,7 @@ for i in $@; do
        	#-entrez_query "$ENTREZ_QUERY"\
 	#-outfmt "6 sallseqid salltitles qseqid evalue pident bitscore"
 	#-perc_identity $PERC_IDENTITY\
-	python blastxml_to_tab.py ${prefix}_blast.xml > ${prefix}_blast.tab
+	python ${NCBI}/blastxml_to_tab.py ${prefix}_blast.xml > ${prefix}_blast.tab
 done
 # Use custom outfmt 
 	#blastn -query $i -db nt -perc_identity 0.97 -evalue 1e-10 -remote -num_alignments $NUM_ALIGNMENTS -entrez_query "gut or feces or intestine or foregut or midgut or hindgut or ileum or rectum or colon or cecum or jejunum or duodenum" -outfmt "6 sallseqid salltitles qseqid evalue bitscore" -out ${prefix}.xml;done

@@ -1,5 +1,11 @@
 #!/bin/python
-# Chad Smith 2016-07-12
+"""
+FASTA Header Editor
+Chad Smith 2016-07-12
+
+Deletes and replaces user-specified patterns from FASTA headers. 
+Reformats standard Genbank header to include only accession and description if specified.
+"""
 import sys
 import re
 import string

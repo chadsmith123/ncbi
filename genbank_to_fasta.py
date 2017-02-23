@@ -1,5 +1,11 @@
 #!/bin/python
-# Chad Smith 07/09/2016
+"""
+Genbank flat file to FASTA converter
+Chad Smith 07/09/2016
+
+Returns FASTA from Genbank flat files (*.gb) using accessions supplied by the user.
+Requires Biopython
+"""
 import sys
 from Bio import SeqIO
 

@@ -1,6 +1,11 @@
 #!/bin/python
-# Retrieves FASTA from genbank using stdin (-) or a list of accessions.
-# Chad Smith 07/11/2016
+"""
+FASTA Get from Genbank
+Chad Smith 07/11/2016
+
+Retrieves FASTA from genbank using accessions from stdin (-) or in a file.
+Requires: Biopython
+"""
 import sys
 from Bio import Entrez
 from Bio import SeqIO
