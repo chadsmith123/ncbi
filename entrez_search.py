@@ -18,7 +18,7 @@ def count(args):
 	if args.count is True:
 		handle = Entrez.esearch(db="nucleotide", term=args.pattern,rettype='count')
 		records = Entrez.read(handle)
-		print records
+		print(records)
 		exit(1)	
 
 	# Collect accession numbers
