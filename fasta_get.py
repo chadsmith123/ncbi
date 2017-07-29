@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 """
 FASTA Get from Genbank
 Chad Smith 07/11/2016
