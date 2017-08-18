@@ -9,12 +9,12 @@ Requires: Biopython
 import sys
 from Bio import Entrez
 from Bio import SeqIO
-from urllib2 import HTTPError
+from urllib.request import HTTPError
 import time
 
 if len(sys.argv) ==1 :
-    print "usage: ", sys.argv[0], "<accessions file>"
-    print "Extracts FASTA for a list of accessions in <file> or stdin (-)"
+    print("usage: ", sys.argv[0], "<accessions file>")
+    print("Extracts FASTA for a list of accessions in <file> or stdin (-)")
     exit(1)
 
 Entrez.email ="chad.smith123@gmail.com"
@@ -28,11 +28,11 @@ else:
 for line in iter(f):
 	try:
         	handle = Entrez.efetch(db="nucleotide", id=line, retmode="text",rettype="fasta")
-    	except HTTPError:
+	except HTTPError:
         	time.sleep(20)
         	handle = Entrez.efetch(db="nucleotide", id=line, retmode="text",rettype="fasta")
 	record = SeqIO.read(handle,"fasta")
-	print ">"+record.description
-	print record.seq
+	print(">"+record.description)
+	print(record.seq)
 if sys.argv[1] != '-':
     f.close()
