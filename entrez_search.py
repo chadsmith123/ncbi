@@ -70,7 +70,7 @@ if __name__ == '__main__':
         parser.add_argument('-pattern2', dest='pattern2', type=str, help='Search pattern for genome database')
         parser.add_argument('-n', dest='num', default='20', type=int, help='Number of records to return')
         parser.add_argument('-db', dest='db', default='nucleotide', type=str, help='NCBI database')
-        parser.add_argument('-rettype', dest='rettype', default='fasta', type=str, help='Return type', choices=['fasta', 'gb'])
+        parser.add_argument('-rettype', dest='rettype', default='fasta', type=str, help='Return type', choices=['gb', 'gbwithparts', 'fasta', 'fasta_cds_na', 'fasta_cds_aa'])
         parser.add_argument('--count', action='store_true',help='Return number of records and exit')
         parser.add_argument('--descr', action='store_true',help='Return sequence description')
         if len(sys.argv)==1:
